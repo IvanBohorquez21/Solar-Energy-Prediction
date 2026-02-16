@@ -1,5 +1,4 @@
 
-```markdown
 # Solar Energy Prediction Estimator ☀️
 
 A professional web application that calculates real-time photovoltaic energy output based on current weather conditions (temperature, humidity, and cloudiness) for any city in the world, with a special focus on Colombian capitals.
