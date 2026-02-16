@@ -14,24 +14,25 @@ This is a professional Streamlit application that estimates the power output of 
    ```bash
    git clone [https://github.com/IvanBohorquez21/Solar-Energy-Prediction.git](https://github.com/IvanBohorquez21/Solar-Energy-Prediction.git)
 
-```
+    ```
 
 2. Install dependencies:
-```bash
-pip install -r requirements.txt
+    ```bash
+        pip install -r requirements.txt
 
-```
+    ```
 
 
 3. Create a `.streamlit/secrets.toml` file with your API Key:
-```toml
-OPENWEATHER_API_KEY = "your_api_key_here"
 
-```
+    ```toml
+        OPENWEATHER_API_KEY = "your_api_key_here"
+
+    ```
 
 
 4. Run the app:
-```bash
-streamlit run app.py
+    ```bash
+        streamlit run app.py
 
-```
+    ```
