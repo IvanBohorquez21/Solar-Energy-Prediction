@@ -8,7 +8,7 @@ from src.processing import calculate_solar_output
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(
     page_title="Solar Energy Predictor", 
-    page_icon="♻️💡🔋", 
+    page_icon="☀️", 
     layout="wide"
 )
 
@@ -54,7 +54,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # 4. HEADER
-st.title("☀️ Solar Energy Production Estimator")
+st.title("♻️☀️🔋Solar Energy Production Estimator")
 st.markdown("### Real-Time Photovoltaic Analysis Dashboard")
 
 # 5. SIDEBAR
