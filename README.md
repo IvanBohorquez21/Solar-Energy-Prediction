@@ -8,6 +8,11 @@ A professional web application that calculates real-time photovoltaic energy out
 - **Physics Engine:** Calculates irradiance and applies thermal derating factors.
 - **Customizable:** Users can adjust panel nominal power and efficiency.
 
+## 📱 App Preview
+![App Screenshot](img/app.png)
+> **Try it yourself:** [🚀 Live Demo on Streamlit Cloud](https://ivan-movie-sentiment.streamlit.app)
+
+
 ## 🚀 Features
 - **Real-time Data:** Fetches current temperature and cloud cover for any city.
 - **Technical Analysis:** Calculates irradiance and thermal derating factors.
