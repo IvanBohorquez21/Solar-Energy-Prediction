@@ -12,35 +12,37 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. CARGA DE CIUDADES DESDE JSON (Nueva lógica)
-@st.cache_data # Usamos caché para no leer el disco en cada clic
+# 2. CARGA DE CIUDADES DESDE JSON
+@st.cache_data
 def load_cities():
     try:
-        # Apuntamos a la carpeta 'data' donde creaste el archivo
         with open('data/cities.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
-        # Unimos las listas de Colombia e International
         all_cities = []
         for category in data.values():
             all_cities.extend(category)
         return sorted(list(set(all_cities)))
-    except FileNotFoundError:
-        # Fallback por si el archivo no se encuentra
-        return ["Bogota", "Medellin", "Miami", "Madrid"]
+    except Exception:
+        return ["Bogota", "Medellin"]
 
 full_city_list = load_cities()
 
-# 3. CSS PARA EL DISEÑO AZULADO
+# 3. CSS ORIGINAL (Restaurado)
 st.markdown("""
     <style>
     .main { background-color: #0e1117; }
+    
     [data-testid="stMetric"] {
         background-color: #1a232e;
         padding: 20px;
         border-radius: 12px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
         border: 1px solid #2d3a4b;
     }
+    
+    [data-testid="stMetricValue"] { color: #ffffff !important; }
+    [data-testid="stMetricLabel"] { color: #8094ad !important; }
+
     .tech-details {
         background-color: #1a232e;
         padding: 20px;
@@ -53,7 +55,7 @@ st.markdown("""
 
 # 4. HEADER
 st.title("☀️ Solar Energy Production Estimator")
-st.markdown("### Real-Time Analysis & Global Comparison")
+st.markdown("### Real-Time Photovoltaic Analysis Dashboard")
 
 # 5. SIDEBAR
 with st.sidebar:
@@ -63,7 +65,7 @@ with st.sidebar:
     selected_cities = st.multiselect(
         "Select Cities to Compare:",
         full_city_list,
-        default=["Bogota", "Medellin"] if "Bogota" in full_city_list else full_city_list[:2]
+        default=["Bogota", "Medellin"]
     )
     
     st.divider()
@@ -82,6 +84,7 @@ if selected_cities:
                 data = response.json()
                 temp = data['main']['temp']
                 clouds = data['clouds']['all']
+                humidity = data['main']['humidity']
                 
                 res = calculate_solar_output(temp, clouds, p_nom, eff_user)
                 
@@ -90,47 +93,63 @@ if selected_cities:
                     "Power (W)": res['power_output'],
                     "Temp (°C)": temp,
                     "Clouds (%)": clouds,
+                    "Humidity (%)": humidity,
                     "Irradiance (W/m²)": res['irradiance'],
                     "Thermal Factor": res['thermal_factor'],
                     "Description": data['weather'][0]['description'].capitalize()
                 })
-        except Exception as e:
-            st.error(f"Error connecting for {city}")
+        except Exception:
+            continue
 
     if results_list:
         df = pd.DataFrame(results_list)
-
-        # 7. GRÁFICA COMPARATIVA
-        st.subheader("📊 Comparative Solar Potential")
-        fig = px.bar(
-            df, x="City", y="Power (W)", color="Power (W)",
-            text_auto='.2f', color_continuous_scale="Blues", template="plotly_dark"
-        )
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
-        st.plotly_chart(fig, use_container_width=True)
-
-        # 8. FOCO EN LA PRIMERA SELECCIÓN
-        st.divider()
+        # Tomamos la primera ciudad de la lista para el enfoque detallado (Focus)
         main_city = results_list[0]
-        st.subheader(f"📍 Focus: {main_city['City']}")
-        
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Temperature", f"{main_city['Temp (°C)']} °C")
-        c2.metric("Cloudiness", f"{main_city['Clouds (%)']} %")
-        c3.metric("Irradiance", f"{main_city['Irradiance (W/m²)']} W/m²")
 
+        # --- DISEÑO ORIGINAL RESTAURADO ---
+        
+        # A. Fila de 4 Métricas (Igual que antes)
+        st.markdown(f"#### 📍 Detailed Focus: {main_city['City']}")
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("Temperature", f"{main_city['Temp (°C)']} °C")
+        col2.metric("Cloudiness", f"{main_city['Clouds (%)']} %")
+        col3.metric("Humidity", f"{main_city['Humidity (%)']} %")
+        col4.metric("Irradiance", f"{main_city['Irradiance (W/m²)']} W/m²")
+
+        st.divider()
+
+        # B. Sección de Resultados y Technical Details (Columnas 2:1)
         res_col, tech_col = st.columns([2, 1])
+
         with res_col:
-            st.success(f"### Estimated Power: **{main_city['Power (W)']} Watts**")
-            st.progress(min(main_city['Power (W)'] / p_nom, 1.0))
+            st.subheader("🚀 Performance Summary")
+            st.success(f"### Current Power Output in {main_city['City']}: **{main_city['Power (W)']} Watts**")
+            
+            cap_ratio = min(main_city['Power (W)'] / p_nom, 1.0)
+            st.write(f"System Capacity Utilization: {cap_ratio*100:.1f}%")
+            st.progress(cap_ratio)
+            
+            # Insertamos el gráfico aquí para que no rompa el flujo visual
+            st.subheader("📊 Comparison Chart")
+            fig = px.bar(df, x="City", y="Power (W)", color="Power (W)",
+                         color_continuous_scale="Blues", template="plotly_dark")
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+            st.plotly_chart(fig, use_container_width=True)
 
         with tech_col:
+            st.subheader("📝 Technical Details")
             st.markdown(f"""
                 <div class="tech-details">
                     <p><strong>Sky:</strong> {main_city['Description']}</p>
                     <p><strong>Thermal Factor:</strong> {main_city['Thermal Factor']}x</p>
-                    <p><strong>Config:</strong> {p_nom}W @ {eff_user}%</p>
+                    <p><strong>Selected Efficiency:</strong> {eff_user}%</p>
+                    <p><strong>Panel Nominal:</strong> {p_nom}W</p>
                 </div>
             """, unsafe_allow_html=True)
+
+        # C. Tabla Comparativa (Al final)
+        st.divider()
+        with st.expander("🔍 View Complete Comparison Table", expanded=True):
+            st.table(df)
 else:
-    st.info("Please select cities from the sidebar.")
+    st.info("Please select one or more cities to begin.")
