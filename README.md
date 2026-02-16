@@ -10,7 +10,7 @@ A professional web application that calculates real-time photovoltaic energy out
 
 ## 📱 App Preview
 ![App Screenshot](img/app.png)
-> **Try it yourself:** [🚀 Live Demo on Streamlit Cloud](https://ivan-movie-sentiment.streamlit.app)
+> **Try it yourself:** [🚀 Live Demo on Streamlit Cloud](https://solar-energy-prediction-nz8xf9vzthdfnysvwgcpqp.streamlit.app)
 
 
 ## 🚀 Features
