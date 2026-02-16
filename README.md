@@ -77,5 +77,3 @@ streamlit run app.py
 * **Plotly** (Interactive Graphics)
 * **Pandas** (Data Management)
 * **OpenWeatherMap API** (Environmental Data)
-
-```
