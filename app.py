@@ -97,7 +97,7 @@ if selected_cities:
         fig = px.bar(
             df, 
             x="City", 
-            y="Current Power (W)", 
+            y="Power (W)", 
             color="Power (W)",
             text_auto='.2f',
             color_continuous_scale="Blues",
