@@ -1,0 +1,11 @@
+{
+  "Colombia": [
+    "Leticia", "Medellin", "Arauca", "Barranquilla", "Cartagena", "Tunja", "Manizales", "Florencia", 
+    "Yopal", "Popayan", "Valledupar", "Quibdo", "Montería", "Bogota", "Inirida", "San Jose del Guaviare", 
+    "Neiva", "Riohacha", "Santa Marta", "Villavicencio", "Pasto", "Cúcuta", "Mocoa", "Armenia", 
+    "Pereira", "San Andres", "Bucaramanga", "Sincelejo", "Ibagué", "Cali", "Mitú", "Puerto Carreño"
+  ],
+  "International": [
+    "Miami", "Madrid", "Mexico City", "London", "Tokyo", "Berlin", "Paris", "New York"
+  ]
+}
