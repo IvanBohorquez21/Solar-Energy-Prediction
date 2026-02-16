@@ -92,7 +92,7 @@ streamlit run app.py
 
 ## 🛠️ Technologies Used
 
-* **Python 3.x**
+* **Python 3.13.1**
 * **Streamlit** (Web Interface)
 * **Plotly** (Interactive Graphics)
 * **Pandas** (Data Management)
