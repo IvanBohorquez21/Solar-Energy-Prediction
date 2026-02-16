@@ -1,7 +1,23 @@
 
 # Solar Energy Prediction Estimator ☀️
 
-A professional web application that calculates real-time photovoltaic energy output based on current weather conditions (temperature, humidity, and cloudiness) for any city in the world, with a special focus on Colombian capitals.
+A professional web application that calculates real-time photovoltaic energy output based on current weather conditions (temperature, humidity, and cloudiness) for any city in the world, with a special focus on the capital cities of the departments of Colombia.
+
+You can modify this in data/cities.json:
+```bash
+    {
+    "Colombia": [
+        "Leticia", "Medellin", "Arauca", "Barranquilla", "Cartagena", "Tunja", "Manizales", "Florencia", 
+        "Yopal", "Popayan", "Valledupar", "Quibdo", "Montería", "Bogota", "Inirida", "San Jose del Guaviare", 
+        "Neiva", "Riohacha", "Santa Marta", "Villavicencio", "Pasto", "Cúcuta", "Mocoa", "Armenia", 
+        "Pereira", "San Andres", "Bucaramanga", "Sincelejo", "Ibagué", "Cali", "Mitú", "Puerto Carreño"
+    ],
+    "International": [
+        "Miami", "Madrid", "Mexico City", "London", "Tokyo", "Berlin", "Paris", "New York"
+    ]
+    }
+```
+
 
 ## 🚀 New Features
 - **Multi-City Comparison:** Compare solar potential across multiple locations simultaneously using interactive charts.
