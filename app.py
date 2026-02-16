@@ -150,6 +150,20 @@ if selected_cities:
         # C. Tabla Comparativa (Al final)
         st.divider()
         with st.expander("🔍 View Complete Comparison Table", expanded=True):
+            # Envolvemos la tabla en un div con scroll horizontal
+            st.markdown("""
+                    <style>
+                        .responsive-table {
+                            width: 100%;
+                            overflow-x: auto;
+                            display: block;
+                        }
+                    </style>
+                    <div class="responsive-table">
+                """, unsafe_allow_html=True)
+            
             st.table(df)
+                
+            st.markdown("</div>", unsafe_allow_html=True)
 else:
     st.info("Please select one or more cities to begin.")
