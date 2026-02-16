@@ -1,4 +1,4 @@
-```markdown
+
 # ☀️ Solar Energy Prediction Estimator
 
 This is a professional Streamlit application that estimates the power output of solar panels in real-time using weather data from the OpenWeatherMap API.
