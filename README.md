@@ -3,7 +3,7 @@
 
 A professional web application that calculates real-time photovoltaic energy output based on current weather conditions (temperature and cloudiness) for any city in the world.
 
-## How it works
+## ⚙️ How it works
 - **Weather Data:** Fetches live data via OpenWeatherMap API.
 - **Physics Engine:** Calculates irradiance and applies thermal derating factors.
 - **Customizable:** Users can adjust panel nominal power and efficiency.
