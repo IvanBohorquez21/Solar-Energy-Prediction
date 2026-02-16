@@ -11,6 +11,7 @@ A professional web application that calculates real-time photovoltaic energy out
 ## 📱 App Preview
 ![App Screenshot](img/app1.png)
 ![App Screenshot](img/app2.png)
+![App Screenshot](img/app3.png)
 > **Try it yourself:** [🚀 Live Demo on Streamlit Cloud](https://solar-energy-prediction-nz8xf9vzthdfnysvwgcpqp.streamlit.app)
 
 
